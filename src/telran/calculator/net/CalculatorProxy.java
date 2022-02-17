@@ -1,0 +1,35 @@
+package telran.calculator.net;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
+
+import telran.calculator.servises.Calculator;
+
+public class CalculatorProxy implements Calculator {
+	private static PrintStream writer;
+	private static BufferedReader reader;
+	private static Socket socket;
+
+	public CalculatorProxy(Socket socket) {
+		this.socket = socket;
+		try {
+			writer = new PrintStream(socket.getOutputStream());
+			reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public double compute(String operator, double op1, double op2) {
+		writer.println(String.format("%s#%s#%s", operator, Double.toString(op1), Double.toString(op2)));
+		try {
+			return Double.parseDouble(reader.readLine());
+		} catch (Exception e) {
+			throw new RuntimeException(e.toString());
+		}
+	}
+}
