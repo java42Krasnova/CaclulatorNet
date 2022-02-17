@@ -12,7 +12,7 @@ private static Calculator calculator;
 private CalculatorActions() {
 	//renamed class
 }
-static public ArrayList<Item> getCalculator(Calculator calculator){
+static public ArrayList<Item> getCalculatorItems(Calculator calculator){
 	CalculatorActions.calculator = calculator;
 	ArrayList<Item> items = new ArrayList<>();
 	items.add(Item.of("Add two numbers", CalculatorActions::add));

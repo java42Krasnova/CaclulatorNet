@@ -9,18 +9,12 @@ import java.net.Socket;
 import telran.calculator.servises.Calculator;
 
 public class CalculatorProxy implements Calculator {
-	private static PrintStream writer;
-	private static BufferedReader reader;
-	private static Socket socket;
+	private  PrintStream writer;
+	private  BufferedReader reader;
 
-	public CalculatorProxy(Socket socket) {
-		this.socket = socket;
-		try {
-			writer = new PrintStream(socket.getOutputStream());
-			reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public CalculatorProxy(BufferedReader reader, PrintStream writer ){		
+		this.writer = writer;
+		this.reader = reader;
 	}
 
 	@Override
