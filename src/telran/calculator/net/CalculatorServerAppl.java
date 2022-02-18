@@ -44,6 +44,7 @@ public class CalculatorServerAppl {
 
 	private static String getResponse(String line) {
 		String[] tokens = line.split("#");
+		//[YG] no need to check operations. It's CalculatorImpl task
 		Set<String> operations = new HashSet<>(Arrays.asList("+", "-", "*", "/"));
 		String res = "";
 		Calculator calc = new CalculatorImpl();
@@ -52,6 +53,7 @@ public class CalculatorServerAppl {
 		} else if (!operations.contains(tokens[0])) {
 			res = "Unknown request";
 		} else {
+			//[YG] exception handling is required                                                                              
 			res += calc.compute(tokens[0], Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2]));
 		}
 		return res;
