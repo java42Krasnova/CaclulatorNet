@@ -11,7 +11,7 @@ import telran.calculator.servises.Calculator;
 public class CalculatorProxy implements Calculator {
 	private  PrintStream writer;
 	private  BufferedReader reader;
-
+//[YG] constructor taking hostname and port would be better                  
 	public CalculatorProxy(BufferedReader reader, PrintStream writer ){		
 		this.writer = writer;
 		this.reader = reader;
@@ -22,6 +22,7 @@ public class CalculatorProxy implements Calculator {
 		writer.println(String.format("%s#%s#%s", operator, Double.toString(op1), Double.toString(op2)));
 		try {
 			return Double.parseDouble(reader.readLine());
+			//[YG] no need exception handling
 		} catch (Exception e) {
 			throw new RuntimeException(e.toString());
 		}
